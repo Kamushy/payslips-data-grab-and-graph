@@ -33,8 +33,6 @@ for file in folder:
 #Keep the r at the start of each path
 #add the path of your 'organisedpdfs' folder on line 83 within qoutes
 locationorganised = os.listdir(r'C:\Users\your\file\path\organised')
-
-
 def getinfo():
     global sundaypay, week, saturdaypay, saturdayhours, weekpay, weekhours, holidayhours, holidaypay, totalpay, totalhours
     for file in sorted(locationorganised)
