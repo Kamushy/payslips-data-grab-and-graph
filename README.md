@@ -6,16 +6,16 @@ Get Deputy payslips into graph and printed data.
 
 ## How to setup
 ### Download packets
-```python
+```ruby
 pip install datetime
 ```
-```python
+```ruby
 pip install tika
 ```
-```python
+```ruby
 pip install numpy
 ```
-```python
+```ruby
 pip install matplotlib
 ```
 ### Create Folders
@@ -23,6 +23,7 @@ pip install matplotlib
 - Create a folder called 'organisedpdfs'
 
 ### Put paths
+- Inside finddate() function
 ```python
 #Keep the r
 #add the path of your 'files' folder on line 29 within qoutes
