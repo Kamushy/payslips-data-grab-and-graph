@@ -1,5 +1,5 @@
 # What it creates
-![Alt text]https://github.com/Kamushy/Deputy-payslips-data-grab-and-graph/blob/main/Graphs.jpg?raw=true "Title")
+![alt text](https://github.com/Kamushy/Deputy-payslips-data-grab-and-graph/blob/main/Graphs.jpg?raw=true)
 # How to setup
 ### Download packets
 ```ruby
