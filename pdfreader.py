@@ -5,6 +5,7 @@ from tika import parser
 from collections import OrderedDict
 import matplotlib.pyplot as plt
 import numpy as np
+import xlsxwriter
 
 dates = {}
 week = 0 
@@ -219,6 +220,100 @@ def removedollar():
     for key, value in saturdayhours.items():
         value = float(value)
         saturdayhours[key] = round(value)
+        
+def createdoc():
+    try:
+        workbook = xlsxwriter.Workbook('HoursAndPay.xlsx')
+    except:
+        os.remove('Example2.xlsx')
+        workbook = xlsxwriter.Workbook('HoursAndPay.xlsx')
+
+    worksheet = workbook.add_worksheet()
+    bold = workbook.add_format({'bold': True})
+    currency_format = workbook.add_format({'num_format': '$#,##0'})
+    row = 0
+    column = 0
+
+    worksheet.write(row, column,"Weekday Pay", bold)
+    row +=1
+    for key, value in weekpay.items():
+        worksheet.write(row, column, value, currency_format)
+        row += 1
+    column +=1
+    row = 0 
+
+    worksheet.write(row, column,"Saturday Pay", bold)
+    row +=1
+    for key, value in saturdaypay.items():
+        worksheet.write(row, column, value, currency_format)
+        row += 1
+    column +=1
+    row = 0 
+
+    worksheet.write(row, column,"Sunday Pay", bold)
+    row +=1
+    for key, value in sundaypay.items():
+        worksheet.write(row, column, value, currency_format)
+        row += 1
+    column +=1
+    row = 0 
+
+    worksheet.write(row, column,"Holiday Pay", bold)
+    row +=1
+    for key, value in holidaypay.items():
+        worksheet.write(row, column, value, currency_format)
+        row += 1
+    column +=2
+    row = 0 
+
+    worksheet.write(row, column,"Total Pay", bold)
+    row +=1
+    for key, value in totalpay.items():
+        worksheet.write(row, column, value, currency_format)
+        row += 1
+    column +=2
+    row = 0 
+
+    worksheet.write(row, column,"WeekDay Hours", bold)
+    row +=1
+    for key, value in weekhours.items():
+        worksheet.write(row, column, value)
+        row += 1
+    column +=1
+    row = 0 
+
+    worksheet.write(row, column,"Saturday Hours", bold)
+    row +=1
+    for key, value in saturdayhours.items():
+        worksheet.write(row, column, value)
+        row += 1
+    column +=1
+    row = 0 
+
+    worksheet.write(row, column,"Sunday Hours", bold)
+    row +=1
+    for key, value in sundayhours.items():
+        worksheet.write(row, column, value)
+        row += 1
+    column +=1
+    row = 0 
+
+    worksheet.write(row, column,"Holiday Hours", bold)
+    row +=1
+    for key, value in holidayhours.items():
+        worksheet.write(row, column, value)
+        row += 1
+    column +=2
+    row = 0 
+
+    worksheet.write(row, column,"Total Hours", bold)
+    row +=1
+    for key, value in totalhours.items():
+        worksheet.write(row, column, value)
+        row += 1
+    row = 0 
+
+    workbook.close()
 
 def graphing():
 
@@ -288,6 +383,7 @@ finddate()
 orderpdf()
 getinfo()
 removedollar()
+createdoc()
 graphing()
 
 print(f"sundaypay: {sundaypay}")
