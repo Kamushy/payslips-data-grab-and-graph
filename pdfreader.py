@@ -168,7 +168,8 @@ def removedollar():
         value = str(value)
         if "$" in value:
             value = value.replace("$", "")
-            sundaypay[key] = float(value)
+            value = float(value)
+            sundaypay[key] = round(value)
         else:
             pass
     
@@ -176,7 +177,8 @@ def removedollar():
         value = str(value)
         if "$" in value:
             value = value.replace("$", "")
-            saturdaypay[key] = float(value)
+            value = float(value)
+            saturdaypay[key] = round(value)
         else:
             pass
 
@@ -184,7 +186,8 @@ def removedollar():
         value = str(value)
         if "$" in value:
             value = value.replace("$", "")
-            weekpay[key] = float(value)
+            value = float(value)
+            weekpay[key] = round(value)
         else:
             pass
     
@@ -192,20 +195,30 @@ def removedollar():
         value = str(value)
         if "$" in value:
             value = value.replace("$", "")
-            holidaypay[key] = float(value)   
+            value = float(value)
+            holidaypay[key] = round(value)   
         else:
             pass
     
     for key, value in totalpay.items():
-        value = int(value)
-        value = round(value, 1)
-        totalpay[key] = float(value)
+        value = float(value)
+        totalpay[key] = round(value)
     
     for key, value in totalhours.items():
-        value = int(value)
-        value = round(value, 0)
-        totalhours[key] = float(value)
-        
+        value = float(value)
+        totalhours[key] = round(value)
+
+    for key, value in weekhours.items():
+        value = float(value)
+        weekhours[key] = round(value)
+
+    for key, value in sundayhours.items():
+        value = float(value)
+        sundayhours[key] = round(value)
+    
+    for key, value in saturdayhours.items():
+        value = float(value)
+        saturdayhours[key] = round(value)
 
 def graphing():
 
