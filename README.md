@@ -1,7 +1,7 @@
 # Final Product
-### Graph 
+### MatPlotLib Graphs 
 ![alt text](https://github.com/Kamushy/Deputy-payslips-data-grab-and-graph/blob/main/Graphs.jpg?raw=true)
-### Created Excel document
+### Excel document created without effort
 ![alt text](https://github.com/Kamushy/Deputy-payslips-data-grab-and-graph/blob/main/Excel%20document.jpg?raw=true)
 # How to setup
 ### Download packets
