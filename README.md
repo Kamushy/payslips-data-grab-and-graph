@@ -12,6 +12,9 @@ pip install numpy
 ```ruby
 pip install matplotlib
 ```
+```ruby
+pip install xlsxwriter
+```
 ### Create Folders
 - Create a folder called 'files'
 - Create a folder called 'organisedpdfs'
