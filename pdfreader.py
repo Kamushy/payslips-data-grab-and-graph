@@ -233,6 +233,14 @@ def createdoc():
     currency_format = workbook.add_format({'num_format': '$#,##0'})
     row = 0
     column = 0
+    
+    worksheet.write(row, column,"Week Number", bold)
+    row +=1
+    for key, value in weekpay.items():
+        worksheet.write(row, column, key)
+        row += 1
+    column +=1
+    row = 0 
 
     worksheet.write(row, column,"Weekday Pay", bold)
     row +=1
