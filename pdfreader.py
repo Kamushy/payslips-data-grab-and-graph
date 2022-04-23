@@ -271,7 +271,7 @@ def createdoc():
     for key, value in holidaypay.items():
         worksheet.write(row, column, value, currency_format)
         row += 1
-    column +=2
+    column +=1
     row = 0 
 
     worksheet.write(row, column,"Total Pay", bold)
@@ -311,7 +311,7 @@ def createdoc():
     for key, value in holidayhours.items():
         worksheet.write(row, column, value)
         row += 1
-    column +=2
+    column +=1
     row = 0 
 
     worksheet.write(row, column,"Total Hours", bold)
@@ -319,6 +319,31 @@ def createdoc():
     for key, value in totalhours.items():
         worksheet.write(row, column, value)
         row += 1
+    column += 2
+    row = 0 
+    
+        worksheet.write(row, column,"Week Number", bold)
+    row +=1
+    for key, value in weekpay.items():
+        worksheet.write(row, column, key)
+        row += 1
+    column +=1
+    row = 0 
+
+    worksheet.write(row, column,"Total Hours", bold)
+    row +=1
+    for key, value in totalhours.items():
+        worksheet.write(row, column, value)
+        row += 1
+    column +=1
+    row = 0 
+
+    worksheet.write(row, column,"Total Pay", bold)
+    row +=1
+    for key, value in totalpay.items():
+        worksheet.write(row, column, value)
+        row += 1
+    column +=1
     row = 0 
 
     workbook.close()
