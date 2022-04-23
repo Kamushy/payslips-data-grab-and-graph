@@ -322,7 +322,7 @@ def createdoc():
     column += 2
     row = 0 
     
-        worksheet.write(row, column,"Week Number", bold)
+    worksheet.write(row, column,"Week Number", bold)
     row +=1
     for key, value in weekpay.items():
         worksheet.write(row, column, key)
