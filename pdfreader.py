@@ -458,7 +458,7 @@ def averages():
     """
     root = Tk()
     root.geometry("500x500")
-    root.title("Pay averages")
+    root.title("Averages")
     l = Label(root, text = averagesforpay, anchor="center")
     l.config(font =("Arial", 24))
     l.place(x=230, y=250, anchor="center")
