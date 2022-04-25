@@ -23,7 +23,7 @@ pip install xlsxwriter
 ### Create Folders
 - Create a folder called 'files'
 - Create a folder called 'organisedpdfs'
-make sure names are exactly this
+### make sure names are exactly this
 
 ### Put paths
 - Inside finddate() function
