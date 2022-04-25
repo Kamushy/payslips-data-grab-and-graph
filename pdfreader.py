@@ -48,8 +48,8 @@ def orderpdf():
     try:
         os.mkdir('organisedpdfs')
     except:
-        #make it completly remove the folder for the future
-        print("organisedpdf folder already exists")
+        shutil.rmtree('organisedpdfs')
+        os.mkdir('organisedpdfs')
 
     #sorts list of dates           
     ordereddate = OrderedDict(sorted(dates.items(), key = lambda x:datetime.strptime(x[0], '%d/%m/%Y')))
@@ -81,9 +81,10 @@ def orderpdf():
 totalpay = {}
 totalhours = {}
 
-locationorganised = os.listdir(r'C:\Users\your\file\path\organised')
+
 def getinfo():
     global sundaypay, week, saturdaypay, saturdayhours, weekpay, weekhours, holidayhours, holidaypay, totalpay, totalhours
+    locationorganised = os.listdir(r'C:\Users\your\file\path\organised')
     for file in sorted(locationorganised):
         toopenfile = (r'C:\Users\your\file\path\organised' + file)
         raworganised = parser.from_file(toopenfile)
