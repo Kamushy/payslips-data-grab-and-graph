@@ -6,6 +6,8 @@ from collections import OrderedDict
 import matplotlib.pyplot as plt
 import numpy as np
 import xlsxwriter
+from tkinter import *
+import statistics
 
 dates = {}
 week = 0 
@@ -412,12 +414,62 @@ def graphing():
     plt.legend()
     plt.show()
     
+def averages():
+    pay = []
+    totalpaynumber = 0
+    indexcount =0 
+    weekcount = []
+    for key, value in totalpay.items():
+        indexcount = indexcount + 1
+        pay.append(value)
+        weekcount.append(key)
+        totalpaynumber =  totalpaynumber + value
+    mean = round(totalpaynumber / indexcount)
+    median = round(statistics.median(pay))
+    mode = statistics.mode(pay)
+    range1 = max(pay) - min(pay)
+
+    hours = []
+    totalhournumber = 0
+    indexcounthour =0 
+    weekcounthour = []
+    for key, value in totalhours.items():
+        indexcounthour = indexcounthour + 1
+        hours.append(value)
+        weekcounthour.append(key)
+        totalhournumber =  totalhournumber + value
+    meanhour = round(totalhournumber / indexcounthour)
+    medianhour = round(statistics.median(hours))
+    modehour = statistics.mode(hours)
+    rangehour =  max(hours) - min(hours)
+    
+    averagesforpay = f"""
+    Pay averages per week
+    Mean: ${mean} 
+    Mode: ${mode} 
+    Median: ${median} 
+    Range: ${range1}
+
+    Hour averages per week
+    Mean: {meanhour} 
+    Mode: {modehour} 
+    Median: {medianhour} 
+    Range: {rangehour}  
+    """
+    root = Tk()
+    root.geometry("500x500")
+    root.title("Pay averages")
+    l = Label(root, text = averagesforpay, anchor="center")
+    l.config(font =("Arial", 24))
+    l.place(x=230, y=250, anchor="center")
+    root.mainloop()
     
 finddate()
 orderpdf()
 getinfo()
 removedollar()
 createdoc()
+averages()
 graphing()
 
 print(f"sundaypay: {sundaypay}")
