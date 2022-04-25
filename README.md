@@ -43,8 +43,9 @@ for file in folder:
 
 def getinfo():
     global sundaypay, week, saturdaypay, saturdayhours, weekpay, weekhours, holidayhours, holidaypay, totalpay, totalhours
+    #change this line below
     locationorganised = os.listdir(r'C:\Users\your\file\path\organised')
     for file in sorted(locationorganised)
-        #add the path of your 'organisedpdfs' folder on line 87 within qoutes AGAIN please keep the r
+        #add the path of your 'organisedpdfs' folder on line 89 within qoutes AGAIN please keep the r
         toopenfile = (r'C:\Users\your\file\path\organised' + file)
 ```
