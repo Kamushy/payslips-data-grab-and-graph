@@ -20,6 +20,9 @@ pip install matplotlib
 ```ruby
 pip install xlsxwriter
 ```
+```ruby
+pip install tkinter
+```
 ### Create Folders
 - Create a folder called 'files'
 - Create a folder called 'organisedpdfs'
