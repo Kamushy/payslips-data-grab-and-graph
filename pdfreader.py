@@ -9,6 +9,7 @@ import xlsxwriter
 from tkinter import *
 import statistics
 
+#PLEASE DO NOT CHANGE FOLDER NAMES
 dates = {}
 week = 0 
 filenumber = 0 
@@ -29,10 +30,10 @@ holidayhours = {}
 def finddate():
     global dates, filething, folder   
     #path to folder
-    folder = os.listdir(r'C:\Users\your\file\path')
+    folder = os.listdir(fr"{os.path.dirname(__file__)}\files\\")
     for file in folder:
         #add the file name onto the path
-        filething = str(r'C:\Users\your\file\path' + f'\{file}')
+        filething = fr'{os.path.dirname(__file__)}\files\\{file}'
         #get raw data from file
         raw = parser.from_file(filething)
         alldata = raw['content']
