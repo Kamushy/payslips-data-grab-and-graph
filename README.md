@@ -30,6 +30,6 @@ pip install tkinter
 ### Create Folders
 - Create a folder called 'files'
 - Create a folder called 'organisedpdfs'
-#### make sure names are exactly this
+Make sure names are exactly this
 
-Then run the program!
+##Then run the program!
