@@ -86,9 +86,12 @@ totalhours = {}
 
 def getinfo():
     global sundaypay, week, saturdaypay, saturdayhours, weekpay, weekhours, holidayhours, holidaypay, totalpay, totalhours
-    locationorganised = os.listdir(r'C:\Users\your\file\path\organised')
+    #gets current file path adds 'organised pdfs' onto it 
+    locationorganised = os.listdir(fr"{os.path.dirname(__file__)}\organisedpdfs\\")
     for file in sorted(locationorganised):
-        toopenfile = (r'C:\Users\your\file\path\organised' + file)
+        #gets current file path then adds organised pdfs and the file name onto it
+        toopenfile = fr'{os.path.dirname(__file__)}\organisedpdfs\{file}'
+        #get rawdata from file
         raworganised = parser.from_file(toopenfile)
         allData = raworganised['content']
         #split the pdf
