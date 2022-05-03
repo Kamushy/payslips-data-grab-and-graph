@@ -27,9 +27,6 @@ pip install xlsxwriter
 ```ruby
 pip install tkinter
 ```
-### Create Folders
-- Create a folder called 'files'
-- Create a folder called 'organisedpdfs'
-Make sure names are exactly this
-
+Once you have downloaded these packets
+Enter you pdfs into the 'files' folder
 ## Then run the program!
