@@ -27,6 +27,5 @@ pip install xlsxwriter
 ```ruby
 pip install tkinter
 ```
-Once you have downloaded these packets
-Enter you pdfs into the 'files' folder
+Once you have downloaded these packets enter you pdfs into the 'files' folder
 ## Then run the program!
