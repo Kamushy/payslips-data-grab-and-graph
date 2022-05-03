@@ -7,7 +7,7 @@
 ### Before we begin
 - DO NOT change any of the folder names
 - if you are going to run the script more then once make sure all the documents and graphs are closed.
-- do get to graphs just close the averages windows
+- to get to graphs just close the averages windows
 ### Download packets
 ```ruby
 pip install datetime
