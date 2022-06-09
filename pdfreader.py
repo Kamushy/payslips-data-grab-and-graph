@@ -9,21 +9,24 @@ import xlsxwriter
 from tkinter import *
 import statistics
 
-#PLEASE DO NOT CHANGE FOLDER NAMES
-dates = {}
+#| |/ /                        | |           
+#| ' / __ _ _ __ ___  _   _ ___| |__  _   _  
+#|  < / _` | '_ ` _ \| | | / __| '_ \| | | | 
+#| . \ (_| | | | | | | |_| \__ \ | | | |_| | 
+#|_|\_\__,_|_| |_| |_|\__,_|___/_| |_|\__, | 
+#                                      __/ | 
+#                                     |___/  
+
+dates= {}
 week = 0 
 filenumber = 0 
 backslash = "\\"
-
 sundaypay = {}
 sundayhours = {}
-
 saturdaypay = {}
 saturdayhours = {}
-
 weekpay = {}
 weekhours = {}
-
 holidaypay = {}
 holidayhours = {}
 
@@ -86,11 +89,11 @@ totalhours = {}
 
 
 def getinfo():
-    global sundaypay, week, saturdaypay, saturdayhours, weekpay, weekhours, holidayhours, holidaypay, totalpay, totalhours
     #gets current file path adds 'organised pdfs' onto it 
     locationorganised = os.listdir(fr"{os.path.dirname(__file__)}\organisedpdfs\\")
+    global sundaypay, week, saturdaypay, saturdayhours, weekpay, weekhours, holidayhours, holidaypay, totalpay, totalhours
     for file in sorted(locationorganised):
-        #gets current file path then adds organised pdfs and the file name onto it
+        #gets current file path then adds organised pdfs and the file name onti it
         toopenfile = fr'{os.path.dirname(__file__)}\organisedpdfs\{file}'
         #get rawdata from file
         raworganised = parser.from_file(toopenfile)
@@ -101,7 +104,7 @@ def getinfo():
         week = week + 1
         saturdayhours[week] = 0
         saturdaypay[week] = 0
-        sundayhours[week] = 0
+        sundayhours[week] = 0 
         sundaypay[week] = 0
         weekpay[week] = 0
         weekhours[week] = 0
@@ -227,12 +230,75 @@ def removedollar():
     for key, value in saturdayhours.items():
         value = float(value)
         saturdayhours[key] = round(value)
+
         
+
+def graphing():
+    plt.figure(1)
+    plt.bar(*zip(*sundaypay.items()), label="Pay")
+    plt.bar(*zip(*sundayhours.items()), label='Hours')
+    plt.xlabel('Week Number')
+    plt.ylabel('Pay(In AUD)')
+    plt.title('Sunday Pay')
+    plt.yticks([ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175, 185, 195, 205, 215, ])
+    plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
+    x = np.arange(1, week+1, 1)
+    plt.xticks(x)
+    plt.legend()
+
+    plt.figure(2)
+    plt.bar(*zip(*weekpay.items()), label="Pay")
+    plt.bar(*zip(*weekhours.items()), label='Hours')
+    plt.xlabel('Week Number')
+    plt.ylabel('Pay(In AUD)')
+    plt.title('Weekday Pay')
+    plt.yticks([ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175, 185, 195, 205])
+    plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
+    x = np.arange(1, week+1, 1)
+    plt.xticks(x)
+    plt.legend()
+
+    plt.figure(3)
+    plt.bar(*zip(*saturdaypay.items()), label="Pay") 
+    plt.bar(*zip(*saturdayhours.items()), label='Hours')
+    plt.xlabel('Week Number')
+    plt.ylabel('Pay(In AUD)')
+    plt.title('Saturday Pay')
+    plt.yticks([ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175, 185])
+    plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
+    x = np.arange(1, week+1, 1)
+    plt.xticks(x)
+    plt.legend()
+
+    plt.figure(4)
+    plt.bar(*zip(*holidaypay.items()), label="Pay")
+    plt.bar(*zip(*holidayhours.items()), label='Hours')
+    plt.xlabel('Week Number')
+    plt.ylabel('Pay(In AUD)')
+    plt.title('Holiday Pay')
+    plt.yticks([ 5, 25,  45,  65,  85,  105,  125,  145,  165,  185, 205, 225, 245, 265, 285, 305, 325])
+    plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
+    x = np.arange(1, week+1, 1)
+    plt.xticks(x)
+    plt.legend()
+
+    plt.figure(5)
+    plt.bar(*zip(*totalpay.items()), label="Pay")
+    plt.bar(*zip(*totalhours.items()), label='Hours')
+    plt.xlabel('Week Number')
+    plt.ylabel('Pay(In AUD)')
+    plt.title('All time Pay')
+    plt.yticks([ 50, 100,  150,  200,  250,  300,  350,  400,  450,  500, 550])
+    plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
+    x = np.arange(1, week+1, 1)
+    plt.xticks(x)
+    plt.legend()
+    plt.show()
+    
 def createdoc():
     try:
         workbook = xlsxwriter.Workbook('HoursAndPay.xlsx')
     except:
-        os.remove('Example2.xlsx')
         workbook = xlsxwriter.Workbook('HoursAndPay.xlsx')
 
     worksheet = workbook.add_worksheet()
@@ -240,7 +306,7 @@ def createdoc():
     currency_format = workbook.add_format({'num_format': '$#,##0'})
     row = 0
     column = 0
-    
+
     worksheet.write(row, column,"Week Number", bold)
     row +=1
     for key, value in weekpay.items():
@@ -291,8 +357,7 @@ def createdoc():
 
     worksheet.write(row, column,"WeekDay Hours", bold)
     row +=1
-    for key, value in weekhours.items():
-        worksheet.write(row, column, value)
+    for key, value in weekhours.items(): 
         row += 1
     column +=1
     row = 0 
@@ -351,74 +416,12 @@ def createdoc():
         worksheet.write(row, column, value)
         row += 1
     column +=1
-    row = 0 
+    row = 0
 
     workbook.close()
 
-def graphing():
-
-    plt.figure(1)
-    plt.bar(*zip(*sundaypay.items()), label="Pay")
-    plt.bar(*zip(*sundayhours.items()), label='Hours')
-    plt.xlabel('Week Number')
-    plt.ylabel('Pay(In AUD)')
-    plt.title('Sunday Pay')
-    plt.yticks([ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175, 185])
-    plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
-    x = np.arange(1, week+1, 1)
-    plt.xticks(x)
-    plt.legend()
-
-    plt.figure(2)
-    plt.bar(*zip(*weekpay.items()), label="Pay")
-    plt.bar(*zip(*weekhours.items()), label='Hours')
-    plt.xlabel('Week Number')
-    plt.ylabel('Pay(In AUD)')
-    plt.title('Weekday Pay')
-    plt.yticks([ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175, 185, 195, 205])
-    plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
-    x = np.arange(1, week+1, 1)
-    plt.xticks(x)
-    plt.legend()
-
-    plt.figure(3)
-    plt.bar(*zip(*saturdaypay.items()), label="Pay") 
-    plt.bar(*zip(*saturdayhours.items()), label='Hours')
-    plt.xlabel('Week Number')
-    plt.ylabel('Pay(In AUD)')
-    plt.title('Saturday Pay')
-    plt.yticks([ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175])
-    plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
-    x = np.arange(1, week+1, 1)
-    plt.xticks(x)
-    plt.legend()
-
-    plt.figure(4)
-    plt.bar(*zip(*holidaypay.items()), label="Pay")
-    plt.bar(*zip(*holidayhours.items()), label='Hours')
-    plt.xlabel('Week Number')
-    plt.ylabel('Pay(In AUD)')
-    plt.title('Holiday Pay')
-    plt.yticks([ 5, 25,  45,  65,  85,  105,  125,  145,  165,  185, 205, 225, 245, 265])
-    plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
-    x = np.arange(1, week+1, 1)
-    plt.xticks(x)
-    plt.legend()
-
-    plt.figure(5)
-    plt.bar(*zip(*totalpay.items()), label="Pay")
-    plt.bar(*zip(*totalhours.items()), label='Hours')
-    plt.xlabel('Week Number')
-    plt.ylabel('Pay(In AUD)')
-    plt.title('All time Pay')
-    plt.yticks([ 50, 100,  150,  200,  250,  300,  350,  400,  450,  500, 550])
-    plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
-    x = np.arange(1, week+1, 1)
-    plt.xticks(x)
-    plt.legend()
-    plt.show()
-    
 def averages():
+    global indexcounthour, totalpaynumber, totalhournumber
     pay = []
     totalpaynumber = 0
     indexcount =0 
@@ -467,7 +470,33 @@ def averages():
     l.config(font =("Arial", 24))
     l.place(x=230, y=250, anchor="center")
     root.mainloop()
-    
+
+
+    Totalpayandhours = f"""
+    Total Pay: {totalpaynumber}
+     
+    Total Hours: {totalhournumber}
+    """
+    root = Tk()
+    root.geometry("500x500")
+    root.title("Averages")
+    l = Label(root, text = Totalpayandhours, anchor="center")
+    l.config(font =("Arial", 24))
+    l.place(x=230, y=250, anchor="center")
+    root.mainloop()
+
+def timewasted():
+    #convert weeks into hours
+    #total hours / hours of all weeks = percentage of weeks spent at work
+    # 
+    global indexcounthour, totalhours
+    if indexcounthour >= 52:
+        for i in range(totalhours[-52], totalhours[0]):
+            for key, value in totalhours:
+                totalhoursrecent += totalhours(value)
+    else:
+        weeknumber = list(totalhours)[-1] 
+
 finddate()
 orderpdf()
 getinfo()
@@ -475,6 +504,7 @@ removedollar()
 createdoc()
 averages()
 graphing()
+timewasted()
 
 print(f"sundaypay: {sundaypay}")
 print(f"saturdaypay: {saturdaypay}")
@@ -486,3 +516,7 @@ print(f"holiday pay: {holidaypay}")
 print(f"holiday hours: {holidayhours}")
 print(f"total pay: {totalpay}")
 print(f"total hours: {totalhours}")
+print("totalhours:")
+print(totalhournumber)
+print("totalpay:")
+print(totalpaynumber)
