@@ -1,6 +1,7 @@
 import os
 from datetime import *
 import shutil
+import tika
 from tika import parser
 from collections import OrderedDict
 import matplotlib.pyplot as plt
@@ -45,7 +46,10 @@ def finddate():
         #get the 25th line which has the date
         rightline = alldata[25]
         #add the line and file name to array e.g. 04/04/2022: C:file.py
-        dates[rightline] = filething    
+        if rightline == "Date:":
+            dates[alldata[26]] = filething
+        else:
+            dates[rightline] = filething    
 
 
 def orderpdf():
@@ -57,7 +61,9 @@ def orderpdf():
         shutil.rmtree('organisedpdfs')
         os.mkdir('organisedpdfs')
 
-    #sorts list of dates           
+    #sorts list of dates
+    for item in dates.items():
+        print(item)
     ordereddate = OrderedDict(sorted(dates.items(), key = lambda x:datetime.strptime(x[0], '%d/%m/%Y')))
     #for item in dictionary
     for key, value in ordereddate.items():
@@ -240,7 +246,6 @@ def graphing():
     plt.xlabel('Week Number')
     plt.ylabel('Pay(In AUD)')
     plt.title('Sunday Pay')
-    plt.yticks([ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175, 185, 195, 205, 215, ])
     plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
     x = np.arange(1, week+1, 1)
     plt.xticks(x)
@@ -252,7 +257,6 @@ def graphing():
     plt.xlabel('Week Number')
     plt.ylabel('Pay(In AUD)')
     plt.title('Weekday Pay')
-    plt.yticks([ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175, 185, 195, 205])
     plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
     x = np.arange(1, week+1, 1)
     plt.xticks(x)
@@ -264,7 +268,6 @@ def graphing():
     plt.xlabel('Week Number')
     plt.ylabel('Pay(In AUD)')
     plt.title('Saturday Pay')
-    plt.yticks([ 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175, 185])
     plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
     x = np.arange(1, week+1, 1)
     plt.xticks(x)
@@ -276,7 +279,6 @@ def graphing():
     plt.xlabel('Week Number')
     plt.ylabel('Pay(In AUD)')
     plt.title('Holiday Pay')
-    plt.yticks([ 5, 25,  45,  65,  85,  105,  125,  145,  165,  185, 205, 225, 245, 265, 285, 305, 325])
     plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
     x = np.arange(1, week+1, 1)
     plt.xticks(x)
@@ -288,7 +290,6 @@ def graphing():
     plt.xlabel('Week Number')
     plt.ylabel('Pay(In AUD)')
     plt.title('All time Pay')
-    plt.yticks([ 50, 100,  150,  200,  250,  300,  350,  400,  450,  500, 550])
     plt.grid(color='#95a5a6', linestyle='-', linewidth=1, axis='y', alpha=0.5)
     x = np.arange(1, week+1, 1)
     plt.xticks(x)
