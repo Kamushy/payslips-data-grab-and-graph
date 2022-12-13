@@ -1,7 +1,6 @@
 import os
 from datetime import *
 import shutil
-import tika
 from tika import parser
 from collections import OrderedDict
 import matplotlib.pyplot as plt
